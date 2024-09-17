@@ -1,7 +1,8 @@
-public class Hero {
-    private String name;
+abstract public class Hero extends Damaged {
+    final private String name;
 
-    public Hero(String name) {
+    public Hero(String name, int health) {
+        super(health);
         this.name = name;
     }
 
@@ -9,7 +10,5 @@ public class Hero {
         return name;
     }
 
-    public void attackEnemy() {
-        System.out.printf("%s атакует врага.\n", name);
-    }
+    abstract public void attackEnemy(Damaged enemy);
 }
