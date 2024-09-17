@@ -1,6 +1,13 @@
 public class TrainingGround {
     public static void main (String[] args) {
-        var hero = new Hero("Eugene");
-        hero.attackEnemy();
+        Hero[] heroes = {
+                new Warrior("Eugene"),
+                new Mage("Ivan"),
+                new Archer("Pete"),
+        };
+
+        for (var hero : heroes) {
+            hero.attackEnemy();
+        }
     }
 }
