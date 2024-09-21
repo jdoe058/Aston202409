@@ -1,3 +1,5 @@
+package lesson;
+
 public class Damaged implements Mortal {
     // Жизнь - количество повреждений, причиняемых вашему персонажу до того, как он умрёт. (c) "Fallout 2"
     private int health;

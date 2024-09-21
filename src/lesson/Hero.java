@@ -1,3 +1,5 @@
+package lesson;
+
 abstract public class Hero extends Damaged {
     final private String name;
 

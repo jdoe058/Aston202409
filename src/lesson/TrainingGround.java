@@ -1,3 +1,5 @@
+package lesson;
+
 import java.util.Arrays;
 
 public class TrainingGround {
@@ -9,6 +11,8 @@ public class TrainingGround {
                 new Mage("Ivan", 40),
                 new Archer("Pete", 50),
         };
+
+        enemies[2] = (new Warrior("",20));
 
         while (hero.isAlive() && Arrays.stream(enemies).allMatch(Damaged::isAlive)) {
             for (var enemy : enemies) {

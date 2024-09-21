@@ -1,3 +1,5 @@
+package lesson;
+
 public class Archer extends Hero{
     public Archer(String name, int health) {
         super(name, health);

@@ -1,3 +1,5 @@
+package lesson;
+
 public class Mage extends Hero{
     public Mage(String name, int health) {
         super(name, health);
