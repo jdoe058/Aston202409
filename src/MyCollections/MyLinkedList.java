@@ -1,4 +1,4 @@
-package lesson_2;
+package MyCollections;
 
 public class MyLinkedList<T> implements MyList<T> {
 

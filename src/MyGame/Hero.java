@@ -1,4 +1,4 @@
-package lesson;
+package MyGame;
 
 abstract public class Hero extends Damaged {
     final private String name;

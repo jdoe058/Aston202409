@@ -1,6 +1,4 @@
-package lesson_2;
-
-import java.util.List;
+package MyCollections;
 
 public class MyListDemo {
     public static void main (String[] args) {

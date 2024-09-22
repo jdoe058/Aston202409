@@ -1,4 +1,4 @@
-package lesson_2;
+package MyCollections;
 
 public interface MyList<T> {
     void push(T value);
