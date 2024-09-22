@@ -1,6 +1,52 @@
 package lesson_2;
 
 public class MyLinkedList<T> implements MyList<T> {
+
+    private Node<T> head;
+
+    static class Node<T> {
+        T value;
+        Node<T> next;
+
+        public Node(T value) {
+            this.next = null;
+            this.value = value;
+        }
+    }
+
+    public MyLinkedList() {
+        this.head = null;
+    }
+
+    //public MyLinkedList(T value) {        this.head = new Node<>(value);    }
+
+    public MyLinkedList(MyLinkedList<T> list) {
+        if (list == null || list.head == null) {
+            this.head = null;
+        } else {
+            head = new Node<>(list.head.value);
+            Node<T> destNode = head, srcNode = list.head;
+            while (srcNode.next != null) {
+                destNode.next = new Node<>(srcNode.next.value);
+                destNode = destNode.next;
+                srcNode = srcNode.next;
+            }
+        }
+    }
+
+    public MyLinkedList(T[] elems) {
+        if (elems == null || elems.length == 0) {
+            this.head = null;
+        } else {
+            head = new Node<>(elems[0]);
+            Node<T> currNode = head;
+            for (var i = 1; i < elems.length; i++) {
+                currNode.next = new Node<>(elems[i]);
+                currNode = currNode.next;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("MyLinkedList : ");
@@ -12,17 +58,6 @@ public class MyLinkedList<T> implements MyList<T> {
         return s.toString();
     }
 
-    Node<T> head;
-
-     static class Node<T> {
-        T value;
-        Node<T> next;
-
-        public Node(T value) {
-            this.next = null;
-            this.value = value;
-        }
-    }
 
     @Override
     public void push(T value) {
@@ -49,51 +84,58 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void add(T value, int index) {
-         if (index == 0) {
+        if (index == 0) {
             push(value);
             return;
-         }
-         Node<T> newNode = new Node<>(value), currNode = head, prev = null;
+        }
+        Node<T> newNode = new Node<>(value), currNode = head, prev = null;
 
-         int counter = 0;
-         while (currNode != null) {
-             if (counter == index) {
-                 newNode.next = currNode;
-                 prev.next = newNode;
-                 break;
-             } else {
-                 prev = currNode;
-                 currNode = currNode.next;
-                 counter++;
-             }
-         }
-         if (currNode == null) {
-             System.out.println("Выход за пределы диапазона");
-         }
-    }
-
-    @Override
-    public void add(MyList<T> values, int index) {
-
+        int counter = 0;
+        while (currNode != null) {
+            if (counter == index) {
+                newNode.next = currNode;
+                prev.next = newNode;
+                break;
+            } else {
+                prev = currNode;
+                currNode = currNode.next;
+                counter++;
+            }
+        }
+        if (currNode == null) {
+            System.out.println("Выход за пределы диапазона");
+        }
     }
 
     @Override
     public T get(int index) {
+        Node<T> currNode = head;
+
+        int counter = 0;
+        while (currNode != null) {
+            if (counter == index) {
+                return currNode.value;
+            } else {
+                currNode = currNode.next;
+                counter++;
+            }
+        }
         return null;
     }
 
     @Override
-    public MyList<T> get(int index, int count) {
+    public T pop() {
         return null;
     }
 
     @Override
-    public void remove(int index) {
-
+    public T remove() {
+        return null;
     }
 
     @Override
-    public void remove(int index, int count) {
-
+    public T remove(int index) {
+        System.out.println("не реализовано");
+        return null;
     }
 }

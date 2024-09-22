@@ -1,14 +1,24 @@
 package lesson_2;
 
 public interface MyList<T> {
-    void push (T value);
+    void push(T value);
+
     void add(T value);
+
     void add(T value, int index);
-    void add(MyList<T> values, int index);
 
     T get(int index);
-    MyList<T> get(int index, int count);
 
-    void remove(int index);
-    void remove(int index, int count);
+    T pop();
+
+    T remove();
+
+//    T remove(int index);
+
+    // void add(MyList<T> values, int index);
+    // MyList<T> get(int index, int count);
+    // MyList<T> remove(int index, int count);
+
+    T remove(int index);
+
 }
