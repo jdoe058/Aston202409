@@ -2,11 +2,13 @@ package MyCollections;
 
 public class MyLinkedList<T> implements MyList<T> {
     private int length;
-    private Node<T> head;
+    private Node<T> head,
+            tail;
 
     static class Node<T> {
         T value;
-        Node<T> next, prev;
+        Node<T> next,
+                prev;
 
         public Node(T value) {
             next = null;
@@ -23,6 +25,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     public MyLinkedList() {
         head = null;
+        tail = null;
         length = 0;
     }
 
@@ -30,12 +33,12 @@ public class MyLinkedList<T> implements MyList<T> {
         if (list == null || list.head == null) {
             new MyLinkedList<>();
         } else {
-            head = new Node<>(list.head.value);
-            Node<T> destNode = head, srcNode = list.head;
+            tail = head = new Node<>(list.head.value);
+            Node<T> srcNode = list.head;
             length = 1;
             while (srcNode.next != null) {
-                destNode.next = new Node<>(srcNode.next.value, srcNode.next.prev, srcNode.next.prev);
-                destNode = destNode.next;
+                tail.next = new Node<>(srcNode.next.value, srcNode.next.prev, srcNode.next.prev);
+                tail = tail.next;
                 srcNode = srcNode.next;
                 length++;
             }
@@ -46,12 +49,11 @@ public class MyLinkedList<T> implements MyList<T> {
         if (elems == null || elems.length == 0) {
             new MyLinkedList<T>();
         } else {
-            head = new Node<>(elems[0]);
-            Node<T> currNode = head, prevNode;
+            tail =  head = new Node<>(elems[0]);
             length = 1;
             for (var i = 1; i < elems.length; i++) {
-                currNode.next = new Node<>(elems[i], currNode, null);
-                currNode = currNode.next;
+                tail.next = new Node<>(elems[i], tail, null);
+                tail = tail.next;
                 length++;
             }
         }
@@ -76,59 +78,41 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void push(T value) {
-        Node<T> newNode = new Node<>(value);
+        Node<T> newNode = new Node<>(value, null, head);
         if (head != null) {
-            newNode.next = head;
             head.prev = newNode;
+        } else {
+            tail = newNode;
         }
-
         head = newNode;
         length++;
     }
 
     @Override
     public void add(T value) {
-         Node<T> newNode = new Node<>(value);
+         Node<T> newNode = new Node<>(value,tail,null);
          if (head == null) {
-             head = newNode;
+             tail = head = newNode;
          } else {
-             Node<T> currNode = head;
-             while (currNode.next != null) {
-                 currNode = currNode.next;
-             }
-             newNode.prev = currNode;
-             currNode.next = newNode;
-
+             tail =  tail.next = newNode;
          }
          length++;
     }
 
     @Override
     public T pop() {
+        System.out.println("не реализовано");
         return null;
     }
 
     @Override
     public T remove() {
+        System.out.println("не реализовано");
         return null;
     }
 
-    @Override
-    public void add(T value, int index) {
-        if (index == 0) {
-            push(value);
-            return;
-        }
-        var currNode = getNode(index);
-        if (currNode == null) {
-            System.out.println("Выход за пределы диапазона");
-        } else {
-            Node<T> newNode;
-            newNode = new Node<>(value, currNode.prev, currNode);
-            currNode.prev.next = newNode;
-        }
-    }
 
+    // операции с индексированием
     private Node<T> getNode (int index) {
         Node<T> currNode = head;
         while (currNode != null) {
@@ -143,7 +127,25 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public T get(int index) {
-        return getNode(index) != null ? getNode(index).value : null;
+        if (index < 0 || index >= length) {
+            System.out.println("Выход за пределы диапазона");
+            return null;
+        }
+        return getNode(index).value;
+    }
+
+    @Override
+    public void add(T value, int index) {
+        if (index == 0) {
+            push(value);
+            return;
+        }
+
+        var currNode = getNode(index);
+
+        Node<T> newNode;
+        newNode = new Node<>(value, currNode.prev, currNode);
+        currNode.prev.next = newNode;
     }
 
     @Override
