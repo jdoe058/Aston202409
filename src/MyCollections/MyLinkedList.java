@@ -29,6 +29,7 @@ public class MyLinkedList<T> implements MyList<T> {
         length = 0;
     }
 
+    /*
     public MyLinkedList(MyLinkedList<T> list) {
         if (list == null || list.head == null) {
             new MyLinkedList<>();
@@ -44,6 +45,7 @@ public class MyLinkedList<T> implements MyList<T> {
             }
         }
     }
+    */
 
     public MyLinkedList(T[] elems) {
         if (elems == null || elems.length == 0) {
@@ -106,12 +108,13 @@ public class MyLinkedList<T> implements MyList<T> {
             if (head != null) {
                 result = head.value;
                 tail = head = null;
+                length--;
             }
         } else {
             result = head.value;
             head = head.next;
+            length--;
         }
-        length--;
         return  result;
    }
 
@@ -122,12 +125,14 @@ public class MyLinkedList<T> implements MyList<T> {
             if (head != null) {
                 result = head.value;
                 tail = head = null;
+                length--;
             }
         } else {
             result = tail.value;
             tail = tail.prev;
+            tail.next = null;
+            length--;
         }
-        length--;
         return result;
     }
 
@@ -159,12 +164,17 @@ public class MyLinkedList<T> implements MyList<T> {
             push(value);
             return;
         }
+        if (index < 0 || index >= length) {
+            System.out.println("Выход за пределы диапазона");
+            return;
+        }
 
         var currNode = getNode(index);
 
         Node<T> newNode;
         newNode = new Node<>(value, currNode.prev, currNode);
         currNode.prev.next = newNode;
+        length++;
     }
 
     @Override
