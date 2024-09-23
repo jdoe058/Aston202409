@@ -4,7 +4,7 @@ package MyCollections;
 public class MyListDemo {
     public static void main (String[] args) {
         MyList<String> a = new MyLinkedList<>(), c =
-            new MyLinkedList<>("1 2 3 4 5 6 7 8".split(" "));
+            new MyLinkedList<>("5 2 7 4 1 6 3 8".split(" "));
         System.out.println(a);
         a.push("One"); System.out.println(a);
         a.push("Two"); System.out.println(a);
@@ -23,8 +23,9 @@ public class MyListDemo {
 
 
         System.out.println(c);
-        c.pop(); System.out.println(c);
+        System.out.println( c.pop() + " / " + c);
         c.push("11"); System.out.println(c);
         c.remove(); System.out.println(c);
+        MyList.sort(c); System.out.println(c);
     }
 }

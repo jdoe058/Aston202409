@@ -1,6 +1,8 @@
 package MyCollections;
 
 public interface MyList<T> {
+    static void sort(MyList list) { list.sort(); }
+
     int length();
     String toString();
 
@@ -17,4 +19,6 @@ public interface MyList<T> {
     T get(int index);
     void add(T value, int index);
     T remove(int index);
+
+    void sort();
 }

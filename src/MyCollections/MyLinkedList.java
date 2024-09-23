@@ -1,6 +1,6 @@
 package MyCollections;
 
-public class MyLinkedList<T> implements MyList<T> {
+public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
     private int length;
     private Node<T> head,
             tail;
@@ -181,5 +181,24 @@ public class MyLinkedList<T> implements MyList<T> {
     public T remove(int index) {
         System.out.println("не реализовано");
         return null;
+    }
+
+
+    @Override
+    public void sort() {
+        Node<T> j = head;
+
+        while (j.next != null) {
+            Node<T> i = j.next;
+            while (i != null) {
+                if (i.value.compareTo(j.value) < 0) {
+                    T tmp = i.value;
+                    i.value = j.value;
+                    j.value = tmp;
+                }
+                i = i.next;
+            }
+            j = j.next;
+        }
     }
 }
