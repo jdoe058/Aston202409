@@ -101,16 +101,35 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public T pop() {
-        System.out.println("не реализовано");
-        return null;
-    }
+        T result = null;
+        if (head == tail) {
+            if (head != null) {
+                result = head.value;
+                tail = head = null;
+            }
+        } else {
+            result = head.value;
+            head = head.next;
+        }
+        length--;
+        return  result;
+   }
 
     @Override
     public T remove() {
-        System.out.println("не реализовано");
-        return null;
+        T result = null;
+        if (head == tail) {
+            if (head != null) {
+                result = head.value;
+                tail = head = null;
+            }
+        } else {
+            result = tail.value;
+            tail = tail.prev;
+        }
+        length--;
+        return result;
     }
-
 
     // операции с индексированием
     private Node<T> getNode (int index) {
